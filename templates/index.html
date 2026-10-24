@@ -4,121 +4,272 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="PageTurn — A curated personal reading tracker and bookshelf sanctuary.">
-  <title>PageTurn — Reading & Book Tracker</title>
+  <title>PageTurn — Reading &amp; Bookshelf Sanctuary</title>
+  
+  <!-- Typography matching the high-contrast editorial serif and clean sans in the design -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
   <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
   <!-- Header / Navigation -->
   <header class="app-header">
     <div class="header-container">
-      <div class="brand">
-        <div class="brand-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
-            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
-            <path d="M8 7h8"></path>
-            <path d="M8 11h6"></path>
-          </svg>
-        </div>
-        <div class="brand-text">
-          <h1 class="brand-title">PageTurn</h1>
-          <span class="brand-subtitle">Reading Sanctuary</span>
+      
+      <!-- Funky circular stamp badges -->
+      <div class="brand-group">
+        <a href="/" class="stamp-badges-cluster" aria-label="PageTurn home">
+          <!-- Stamp 1: Lavender/Violet Badge with PAGE / TURN -->
+          <div class="stamp-badge badge-lavender" title="PageTurn Creative Desk">
+            <svg viewBox="0 0 48 48" class="stamp-svg">
+              <circle cx="24" cy="24" r="21" fill="#f0d5fa" stroke="#4338ca" stroke-width="2" stroke-dasharray="3 2" />
+              <text x="24" y="16" text-anchor="middle" font-size="6.5" font-weight="800" fill="#4338ca" font-family="'Plus Jakarta Sans', sans-serif">P A G E</text>
+              <path d="M21 24 L27 18 M27 18 L27 23 M27 18 L22 18" stroke="#4338ca" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+              <text x="24" y="37" text-anchor="middle" font-size="6.5" font-weight="800" fill="#4338ca" font-family="'Plus Jakarta Sans', sans-serif">T U R N</text>
+            </svg>
+          </div>
+
+          <!-- Stamp 2: Canary Yellow Badge with Flower Doodle -->
+          <div class="stamp-badge badge-yellow" title="Bookshelf Sanctuary">
+            <svg viewBox="0 0 48 48" class="stamp-svg">
+              <circle cx="24" cy="24" r="21" fill="#fef08a" stroke="#2522e6" stroke-width="2" />
+              <!-- Daisy flower doodle -->
+              <g stroke="#2522e6" stroke-width="2" fill="#fff">
+                <circle cx="24" cy="17" r="3.5" />
+                <circle cx="31" cy="24" r="3.5" />
+                <circle cx="24" cy="31" r="3.5" />
+                <circle cx="17" cy="24" r="3.5" />
+                <circle cx="20" cy="19" r="3.5" />
+                <circle cx="28" cy="19" r="3.5" />
+                <circle cx="28" cy="29" r="3.5" />
+                <circle cx="20" cy="29" r="3.5" />
+                <circle cx="24" cy="24" r="3" fill="#2522e6" />
+              </g>
+              <text x="24" y="44" text-anchor="middle" font-size="6" font-weight="900" fill="#2522e6">✿</text>
+            </svg>
+          </div>
+
+          <!-- Stamp 3: Cyan Badge with Angled Lettering -->
+          <div class="stamp-badge badge-cyan" title="Design & Reading Sanctuary">
+            <svg viewBox="0 0 48 48" class="stamp-svg">
+              <circle cx="24" cy="24" r="21" fill="#bae6fd" stroke="#0284c7" stroke-width="2" />
+              <path d="M14 16 L34 32 M34 16 L14 32" stroke="#0284c7" stroke-width="1.2" stroke-dasharray="2 2" opacity="0.6"/>
+              <text x="18" y="22" font-size="9" font-weight="800" fill="#0284c7" font-family="'Plus Jakarta Sans', sans-serif">R</text>
+              <text x="28" y="22" font-size="9" font-weight="800" fill="#0284c7" font-family="'Plus Jakarta Sans', sans-serif">E</text>
+              <text x="18" y="34" font-size="9" font-weight="800" fill="#0284c7" font-family="'Plus Jakarta Sans', sans-serif">A</text>
+              <text x="28" y="34" font-size="9" font-weight="800" fill="#0284c7" font-family="'Plus Jakarta Sans', sans-serif">D</text>
+            </svg>
+          </div>
+        </a>
+
+        <div class="brand-logotype">
+          <span class="brand-desk-tag">Reading Room</span>
         </div>
       </div>
-
-      <nav class="header-nav">
-        <button id="btn-open-goal" class="btn btn-secondary nav-action" title="Manage Reading Goal">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10"></circle>
-            <circle cx="12" cy="12" r="6"></circle>
-            <circle cx="12" cy="12" r="2"></circle>
-          </svg>
-          <span class="nav-btn-text">Reading Goal</span>
-          <span id="nav-goal-pill" class="badge-pill">0%</span>
-        </button>
-
-        <button id="btn-open-add-book" class="btn btn-primary nav-action" title="Add a new book">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="12" y1="5" x2="12" y2="19"></line>
-            <line x1="5" y1="12" x2="19" y2="12"></line>
-          </svg>
-          <span class="nav-btn-text">Add Book</span>
-        </button>
-      </nav>
     </div>
   </header>
 
-  <!-- Main Layout -->
+  <!-- Main Content Layout -->
   <main class="main-content">
     <div class="content-container">
 
-      <!-- Hero & Welcome Section -->
-      <section class="welcome-section" aria-label="Welcome and summary">
-        <div class="welcome-text">
-          <div class="welcome-eyebrow">Personal Reading Journal</div>
-          <h2 class="welcome-headline">Quiet chapters, steady pages.</h2>
-          <p class="welcome-desc">Track your reading habits, celebrate completed works, and cultivate a lifelong love for timeless literature.</p>
+      <!-- HERO SECTION: PageTurn -->
+      <section class="hero-section" aria-label="Reading sanctuary introduction">
+        <div class="hero-heading-block">
+          <h1 class="hero-headline">PageTurn.</h1>
+          <p class="hero-subheadline">
+            A personal reading tracker &amp; bookshelf sanctuary; track chapters, cultivate daily reading habits, and celebrate every page turned.
+          </p>
         </div>
-        <div class="welcome-stats-overview">
-          <div class="mini-stat-card">
-            <div class="mini-stat-icon icon-forest">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+
+        <!-- DESK SHOWCASE & MINICOM INTERACTION -->
+        <div class="desk-interactive-stage">
+          <!-- Mascot & Stacked Notebooks on Left -->
+          <div class="minicom-mascot-unit">
+            <svg viewBox="0 0 200 220" class="minicom-mascot-svg" role="img" aria-label="Cute MINICOM retro monitor character standing on stacked notebooks">
+              <!-- Stack of books / notebooks on desk -->
+              <g id="stacked-notebooks">
+                <!-- Bottom sketchbook (Yellow/Canary) -->
+                <rect x="15" y="178" width="170" height="26" rx="4" fill="#fef08a" stroke="#2522e6" stroke-width="2.5" />
+                <line x1="25" y1="184" x2="175" y2="184" stroke="#eab308" stroke-width="1.5" stroke-dasharray="3 3"/>
+                <line x1="25" y1="192" x2="160" y2="192" stroke="#eab308" stroke-width="1.5" stroke-dasharray="3 3"/>
+
+                <!-- Middle book (Cyan / Aqua) -->
+                <rect x="25" y="152" width="150" height="28" rx="4" fill="#7dd3fc" stroke="#2522e6" stroke-width="2.5" />
+                <rect x="25" y="152" width="22" height="28" rx="2" fill="#38bdf8" stroke="#2522e6" stroke-width="2.5" />
+                <line x1="55" y1="166" x2="140" y2="166" stroke="#2522e6" stroke-width="2"/>
+
+                <!-- Top pink spiral notebook with cute blue spiral rings -->
+                <rect x="20" y="112" width="156" height="42" rx="6" fill="#fbcfe8" stroke="#2522e6" stroke-width="2.5" />
+                <line x1="30" y1="126" x2="160" y2="126" stroke="#f472b6" stroke-width="1.5" />
+                <line x1="30" y1="138" x2="140" y2="138" stroke="#f472b6" stroke-width="1.5" />
+                <!-- Spiral binding rings on notebook -->
+                <circle cx="40" cy="112" r="3.5" fill="#fff" stroke="#2522e6" stroke-width="2" />
+                <circle cx="60" cy="112" r="3.5" fill="#fff" stroke="#2522e6" stroke-width="2" />
+                <circle cx="80" cy="112" r="3.5" fill="#fff" stroke="#2522e6" stroke-width="2" />
+                <circle cx="100" cy="112" r="3.5" fill="#fff" stroke="#2522e6" stroke-width="2" />
+                <circle cx="120" cy="112" r="3.5" fill="#fff" stroke="#2522e6" stroke-width="2" />
+                <circle cx="140" cy="112" r="3.5" fill="#fff" stroke="#2522e6" stroke-width="2" />
+                <circle cx="160" cy="112" r="3.5" fill="#fff" stroke="#2522e6" stroke-width="2" />
+              </g>
+
+              <!-- MINICOM Character -->
+              <g id="minicom-character">
+                <!-- Legs standing on notebook -->
+                <path d="M82 100 L76 112 M118 100 L124 112" stroke="#2522e6" stroke-width="3" stroke-linecap="round" />
+                <!-- Shoes -->
+                <ellipse cx="74" cy="112" rx="4" ry="2" fill="#2522e6" />
+                <ellipse cx="126" cy="112" rx="4" ry="2" fill="#2522e6" />
+
+                <!-- Arms with cute hands -->
+                <path d="M68 65 Q50 72 64 88" fill="none" stroke="#2522e6" stroke-width="2.5" stroke-linecap="round" />
+                <path d="M132 65 Q150 72 136 88" fill="none" stroke="#2522e6" stroke-width="2.5" stroke-linecap="round" />
+
+                <!-- Computer Monitor Body -->
+                <rect x="68" y="24" width="64" height="66" rx="14" fill="#ffffff" stroke="#2522e6" stroke-width="3" />
+                
+                <!-- Split color side / depth of monitor (pastel yellow and cyan base) -->
+                <path d="M68 70 L68 76 Q68 90 82 90 L118 90 Q132 90 132 76 L132 70 Z" fill="#67e8f9" stroke="#2522e6" stroke-width="3" />
+                <path d="M68 70 L100 70 L100 90 L82 90 Q68 90 68 76 Z" fill="#fef08a" stroke="#2522e6" stroke-width="3" />
+
+                <!-- Screen bezel & dark cobalt blue CRT face -->
+                <rect x="76" y="32" width="48" height="42" rx="8" fill="#2522e6" />
+
+                <!-- Adorable face features (heart cheeks / cute eyes / smile) -->
+                <!-- Cheeks: small pink hearts -->
+                <text x="80" y="44" font-size="7" fill="#f472b6" font-family="'Plus Jakarta Sans', sans-serif">♡</text>
+                <text x="113" y="44" font-size="7" fill="#f472b6" font-family="'Plus Jakarta Sans', sans-serif">♡</text>
+                
+                <!-- Eyes: vertical retro rounded slits -->
+                <rect x="88" y="46" width="3" height="8" rx="1.5" fill="#ffffff" />
+                <rect x="108" y="46" width="3" height="8" rx="1.5" fill="#ffffff" />
+                
+                <!-- Cute subtle smile -->
+                <path d="M96 58 Q99 61 103 58" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" />
+              </g>
+            </svg>
+          </div>
+
+          <!-- MINICOM Speech Bubble Card (Matching the speech bubble in reference image) -->
+          <div class="speech-bubble-card">
+            <!-- Anchored Tag on Top Border -->
+            <div class="bubble-tag-pill">MINICOM</div>
+
+            <!-- Dialogue text -->
+            <div class="bubble-content-wrap">
+              <p id="minicom-dialogue" class="bubble-dialogue-text">
+                Hi, I'm MINICOM! Your bookshelf is looking peaceful today.<br>
+                Pick a book, flip some pages, and keep your reading streak alive! <span id="btn-dialogue-next" class="dialogue-arrow" title="Next message">▶</span>
+              </p>
             </div>
-            <div class="mini-stat-info">
-              <span id="stat-total-books" class="mini-stat-number">0</span>
-              <span class="mini-stat-label">Total Books</span>
+
+            <!-- Bubble Footer: Dots indicator & page count -->
+            <div class="bubble-footer">
+              <div class="bubble-dots" id="bubble-dots-indicator" aria-label="Slide dots">
+                <span class="b-dot active" data-slide="0"></span>
+                <span class="b-dot" data-slide="1"></span>
+                <span class="b-dot" data-slide="2"></span>
+              </div>
+              <span id="bubble-slide-counter" class="bubble-counter">1 of 3</span>
             </div>
           </div>
 
-          <div class="mini-stat-card">
-            <div class="mini-stat-icon icon-amber">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
-            </div>
-            <div class="mini-stat-info">
-              <span id="stat-reading-books" class="mini-stat-number">0</span>
-              <span class="mini-stat-label">In Progress</span>
-            </div>
-          </div>
+          <!-- Retro Illustrated Camera on Right (Matching the camera on the right of reference image) -->
+          <div class="desk-camera-unit">
+            <svg viewBox="0 0 170 140" class="camera-svg" role="img" aria-label="Cute pastel toy camera with lens and doodle details">
+              <!-- Camera Main Body (Cyan / Aqua with Pink Top) -->
+              <rect x="12" y="32" width="146" height="96" rx="16" fill="#38bdf8" stroke="#2522e6" stroke-width="3" />
+              <!-- Top plate (Pink) -->
+              <path d="M12 48 L12 40 Q12 32 20 32 L150 32 Q158 32 158 40 L158 48 Z" fill="#fbcfe8" stroke="#2522e6" stroke-width="3" />
 
-          <div class="mini-stat-card">
-            <div class="mini-stat-icon icon-sage">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-            </div>
-            <div class="mini-stat-info">
-              <span id="stat-completed-books" class="mini-stat-number">0</span>
-              <span class="mini-stat-label">Completed</span>
-            </div>
-          </div>
+              <!-- Top Knobs & Shutter (Yellow) -->
+              <rect x="30" y="18" width="34" height="15" rx="5" fill="#fef08a" stroke="#2522e6" stroke-width="2.5" />
+              <rect x="110" y="20" width="24" height="13" rx="4" fill="#fef08a" stroke="#2522e6" stroke-width="2.5" />
 
-          <div class="mini-stat-card">
-            <div class="mini-stat-icon icon-terracotta">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
-            </div>
-            <div class="mini-stat-info">
-              <span id="stat-pages-read" class="mini-stat-number">0</span>
-              <span class="mini-stat-label">Pages Read</span>
-            </div>
+              <!-- Left speaker / vertical grip buttons -->
+              <g fill="#2522e6">
+                <circle cx="34" cy="68" r="3" fill="#fff" stroke="#2522e6" stroke-width="2"/>
+                <circle cx="34" cy="80" r="3" fill="#fff" stroke="#2522e6" stroke-width="2"/>
+                <circle cx="34" cy="92" r="3" fill="#fff" stroke="#2522e6" stroke-width="2"/>
+                <circle cx="34" cy="104" r="3" fill="#fff" stroke="#2522e6" stroke-width="2"/>
+              </g>
+
+              <!-- Main Big Lens (layered circles: White, Yellow, Cyan, Dark Center) -->
+              <circle cx="86" cy="84" r="32" fill="#ffffff" stroke="#2522e6" stroke-width="3" />
+              <circle cx="86" cy="84" r="24" fill="#fef08a" stroke="#2522e6" stroke-width="2" />
+              <circle cx="86" cy="84" r="16" fill="#67e8f9" stroke="#2522e6" stroke-width="2.5" />
+              <circle cx="86" cy="84" r="8" fill="#2522e6" />
+              <circle cx="83" cy="81" r="3" fill="#ffffff" />
+
+              <!-- Cute flower doodle sticker on bottom right -->
+              <g transform="translate(132, 94)">
+                <circle cx="0" cy="-4" r="3" fill="#7dd3fc" />
+                <circle cx="4" cy="0" r="3" fill="#7dd3fc" />
+                <circle cx="0" cy="4" r="3" fill="#7dd3fc" />
+                <circle cx="-4" cy="0" r="3" fill="#7dd3fc" />
+                <circle cx="0" cy="0" r="2.5" fill="#fef08a" stroke="#2522e6" stroke-width="1.5" />
+              </g>
+
+              <!-- Brand script scribble -->
+              <text x="24" y="44" font-size="8" font-weight="800" fill="#2522e6" font-family="'Plus Jakarta Sans', sans-serif">PAGETURN</text>
+            </svg>
           </div>
         </div>
       </section>
 
-      <!-- Dashboard Cards: Continue Reading + Goal & Genre Insights -->
+      <!-- STATS OVERVIEW SECTION -->
+      <section id="stats-overview" class="welcome-stats-row" aria-label="Reading overview numbers">
+        <div class="mini-stat-card stat-card-lavender">
+          <div class="mini-stat-badge">Total</div>
+          <div class="mini-stat-info">
+            <span id="stat-total-books" class="mini-stat-number">0</span>
+            <span class="mini-stat-label">Library Titles</span>
+          </div>
+        </div>
+
+        <div class="mini-stat-card stat-card-yellow">
+          <div class="mini-stat-badge">Reading</div>
+          <div class="mini-stat-info">
+            <span id="stat-reading-books" class="mini-stat-number">0</span>
+            <span class="mini-stat-label">In Progress</span>
+          </div>
+        </div>
+
+        <div class="mini-stat-card stat-card-cyan">
+          <div class="mini-stat-badge">Finished</div>
+          <div class="mini-stat-info">
+            <span id="stat-completed-books" class="mini-stat-number">0</span>
+            <span class="mini-stat-label">Completed</span>
+          </div>
+        </div>
+
+        <div class="mini-stat-card stat-card-pink">
+          <div class="mini-stat-badge">Pages</div>
+          <div class="mini-stat-info">
+            <span id="stat-pages-read" class="mini-stat-number">0</span>
+            <span class="mini-stat-label">Pages Turned</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- DASHBOARD CARDS: Currently Reading & Reading Goal -->
       <section class="dashboard-grid">
-        <!-- Continue Reading Hero Card -->
+        <!-- Currently Reading Featured Card -->
         <div id="continue-reading-card" class="featured-card">
           <div class="featured-card-header">
-            <span class="featured-badge">Currently Reading</span>
+            <span class="featured-badge">Currently on the Desk</span>
             <span id="continue-reading-date" class="featured-meta"></span>
           </div>
           <div id="continue-reading-content" class="featured-card-body">
-            <!-- Populated dynamically via JS -->
             <div class="featured-empty">
-              <p>No book is currently marked as in progress. Pick a title from your shelf to begin reading.</p>
+              <p>No book is currently open on your desk. Pick a volume from the shelf below to dive in.</p>
             </div>
           </div>
         </div>
 
-        <!-- Reading Goal Card -->
+        <!-- Annual Reading Goal Card -->
         <div class="goal-widget-card">
           <div class="widget-header">
             <h3 class="widget-title">Annual Reading Goal</h3>
@@ -128,12 +279,12 @@
             <div class="goal-progress-container">
               <div class="goal-numbers">
                 <span id="goal-completed-count" class="goal-big-num">0</span>
-                <span class="goal-divider">of</span>
+                <span class="goal-divider">/</span>
                 <span id="goal-target-count" class="goal-target-num">12</span>
                 <span class="goal-unit">books read</span>
               </div>
               <div class="progress-bar-track">
-                <div id="goal-progress-fill" class="progress-bar-fill progress-forest" style="width: 0%;"></div>
+                <div id="goal-progress-fill" class="progress-bar-fill progress-blue" style="width: 0%;"></div>
               </div>
               <div class="goal-status-text">
                 <span id="goal-percent-text">0% completed</span>
@@ -144,38 +295,37 @@
         </div>
       </section>
 
-      <!-- Genre Insights Section -->
+      <!-- GENRE INSIGHTS SECTION -->
       <section class="genre-insights-section">
         <div class="section-header-compact">
           <div class="section-title-wrap">
-            <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path><path d="M22 12A10 10 0 0 0 12 2v10z"></path></svg>
-            <h3 class="section-title">Genre Insights</h3>
+            <h3 class="section-title">Genre Library Tags</h3>
           </div>
           <span class="section-caption text-muted">Distribution of genres across your library</span>
         </div>
         <div id="genre-distribution-container" class="genre-chips-container">
-          <!-- Populated by JavaScript from statistics API -->
           <div class="loading-placeholder">Calculating genre distribution...</div>
         </div>
       </section>
 
-      <!-- Bookshelf Main Section -->
-      <section class="bookshelf-section" aria-label="Personal Bookshelf">
+      <!-- BOOKSHELF MAIN SECTION -->
+      <section id="bookshelf-section" class="bookshelf-section" aria-label="Personal Bookshelf">
         <div class="bookshelf-header">
           <div class="bookshelf-heading">
-            <h3 class="section-title">My Bookshelf</h3>
+            <h2 class="section-title">My Bookshelf</h2>
             <span id="books-count-badge" class="count-badge">8 books</span>
+            <button id="btn-open-add-book" class="pill-btn pill-btn-cyan" style="margin-left: auto;" title="Add a new book">+ Add Book</button>
           </div>
 
           <!-- Controls Bar -->
           <div class="bookshelf-controls">
             <!-- Search Field -->
             <div class="search-input-wrapper">
-              <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                 <circle cx="11" cy="11" r="8"></circle>
                 <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
               </svg>
-              <input type="text" id="input-search" placeholder="Search by title or author..." autocomplete="off">
+              <input type="text" id="input-search" placeholder="Search by book title or author..." autocomplete="off">
               <button id="btn-clear-search" class="btn-clear-icon" style="display: none;" title="Clear search">×</button>
             </div>
 
@@ -184,7 +334,7 @@
               <!-- Status Filter Pills -->
               <div class="segmented-control" role="tablist" aria-label="Filter by reading status">
                 <button class="seg-btn active" data-status="all">All</button>
-                <button class="seg-btn" data-status="Want to Read">Want to Read</button>
+                <button class="seg-btn" data-status="Want to Read">To Read</button>
                 <button class="seg-btn" data-status="Currently Reading">Reading</button>
                 <button class="seg-btn" data-status="Completed">Completed</button>
               </div>
@@ -229,11 +379,11 @@
                   </select>
                 </div>
                 <button id="btn-toggle-sort-order" class="btn-icon" data-order="desc" title="Toggle Ascending / Descending">
-                  <svg id="icon-sort-desc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <svg id="icon-sort-desc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                     <line x1="12" y1="5" x2="12" y2="19"></line>
                     <polyline points="19 12 12 19 5 12"></polyline>
                   </svg>
-                  <svg id="icon-sort-asc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: none;">
+                  <svg id="icon-sort-asc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display: none;">
                     <line x1="12" y1="19" x2="12" y2="5"></line>
                     <polyline points="5 12 12 5 19 12"></polyline>
                   </svg>
@@ -254,7 +404,7 @@
         <!-- Empty State -->
         <div id="bookshelf-empty-state" class="empty-state-card" style="display: none;">
           <div class="empty-state-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
               <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
             </svg>
@@ -262,8 +412,8 @@
           <h4 id="empty-state-title" class="empty-state-title">No books match your criteria</h4>
           <p id="empty-state-message" class="empty-state-desc">Try clearing your search query or relaxing your active filters to see your books.</p>
           <div class="empty-state-actions">
-            <button id="btn-empty-clear-filters" class="btn btn-secondary">Clear All Filters</button>
-            <button id="btn-empty-add-book" class="btn btn-primary">+ Add New Book</button>
+            <button id="btn-empty-clear-filters" class="pill-btn pill-btn-pink">Clear All Filters</button>
+            <button id="btn-empty-add-book" class="pill-btn pill-btn-cyan">+ Add New Book</button>
           </div>
         </div>
       </section>
@@ -271,10 +421,11 @@
     </div>
   </main>
 
+
   <!-- Footer -->
   <footer class="app-footer">
     <div class="footer-container">
-      <p class="footer-text">PageTurn — Crafted for thoughtful readers. Built with Flask &amp; SQLite.</p>
+      <p class="footer-text">PageTurn — A curated personal reading tracker &amp; bookshelf sanctuary. Built with Flask &amp; SQLite.</p>
     </div>
   </footer>
 
@@ -359,37 +510,37 @@
           <div class="cover-style-picker">
             <label class="style-choice">
               <input type="radio" name="cover_style" value="forest" checked>
-              <span class="palette-swatch swatch-forest" title="Forest Green"></span>
-              <span class="swatch-name">Forest</span>
+              <span class="palette-swatch swatch-forest" title="Electric Blue"></span>
+              <span class="swatch-name">Cobalt</span>
             </label>
             <label class="style-choice">
               <input type="radio" name="cover_style" value="terracotta">
-              <span class="palette-swatch swatch-terracotta" title="Terracotta"></span>
-              <span class="swatch-name">Terracotta</span>
+              <span class="palette-swatch swatch-terracotta" title="Pastel Pink"></span>
+              <span class="swatch-name">Pink</span>
             </label>
             <label class="style-choice">
               <input type="radio" name="cover_style" value="navy">
-              <span class="palette-swatch swatch-navy" title="Deep Navy"></span>
+              <span class="palette-swatch swatch-navy" title="Deep Ink"></span>
               <span class="swatch-name">Navy</span>
             </label>
             <label class="style-choice">
               <input type="radio" name="cover_style" value="amber">
-              <span class="palette-swatch swatch-amber" title="Warm Amber"></span>
-              <span class="swatch-name">Amber</span>
+              <span class="palette-swatch swatch-amber" title="Canary Yellow"></span>
+              <span class="swatch-name">Yellow</span>
             </label>
             <label class="style-choice">
               <input type="radio" name="cover_style" value="plum">
-              <span class="palette-swatch swatch-plum" title="Rich Plum"></span>
-              <span class="swatch-name">Plum</span>
+              <span class="palette-swatch swatch-plum" title="Lavender"></span>
+              <span class="swatch-name">Lavender</span>
             </label>
             <label class="style-choice">
               <input type="radio" name="cover_style" value="sage">
-              <span class="palette-swatch swatch-sage" title="Muted Sage"></span>
-              <span class="swatch-name">Sage</span>
+              <span class="palette-swatch swatch-sage" title="Sky Aqua"></span>
+              <span class="swatch-name">Aqua</span>
             </label>
             <label class="style-choice">
               <input type="radio" name="cover_style" value="slate">
-              <span class="palette-swatch swatch-slate" title="Slate Gray"></span>
+              <span class="palette-swatch swatch-slate" title="Charcoal Slate"></span>
               <span class="swatch-name">Slate</span>
             </label>
           </div>
@@ -397,12 +548,12 @@
 
         <div class="form-group">
           <label for="book-input-notes" class="form-label">Notes &amp; Reflections (Optional)</label>
-          <textarea id="book-input-notes" class="form-control" rows="2" placeholder="Favorite quotes, key takeaways, or reading context..."></textarea>
+          <textarea id="book-input-notes" class="form-control" rows="2" placeholder="Favorite quotes, thoughts from the desk..."></textarea>
         </div>
 
         <div class="modal-footer">
-          <button type="button" id="btn-cancel-book-modal" class="btn btn-secondary">Cancel</button>
-          <button type="submit" id="btn-save-book" class="btn btn-primary">Save Book</button>
+          <button type="button" id="btn-cancel-book-modal" class="pill-btn pill-btn-pink">Cancel</button>
+          <button type="submit" id="btn-save-book" class="pill-btn pill-btn-cyan">Save Book</button>
         </div>
       </form>
     </div>
@@ -412,7 +563,7 @@
   <div id="modal-progress" class="modal-backdrop" aria-hidden="true" role="dialog" aria-labelledby="modal-progress-title">
     <div class="modal-sheet modal-sm">
       <div class="modal-header">
-        <h3 id="modal-progress-title" class="modal-title">Update Reading Progress</h3>
+        <h3 id="modal-progress-title" class="modal-title">Reading Progress</h3>
         <button id="btn-close-progress-modal" class="modal-close-btn" aria-label="Close modal">&times;</button>
       </div>
       <form id="form-progress" class="modal-body">
@@ -429,7 +580,7 @@
               <span id="progress-preview-percent" class="fw-semibold">0%</span>
             </div>
             <div class="progress-bar-track">
-              <div id="progress-preview-fill" class="progress-bar-fill progress-forest" style="width: 0%;"></div>
+              <div id="progress-preview-fill" class="progress-bar-fill progress-blue" style="width: 0%;"></div>
             </div>
           </div>
         </div>
@@ -450,8 +601,8 @@
         </div>
 
         <div class="modal-footer">
-          <button type="button" id="btn-cancel-progress-modal" class="btn btn-secondary">Cancel</button>
-          <button type="submit" id="btn-save-progress" class="btn btn-primary">Save Progress</button>
+          <button type="button" id="btn-cancel-progress-modal" class="pill-btn pill-btn-pink">Cancel</button>
+          <button type="submit" id="btn-save-progress" class="pill-btn pill-btn-cyan">Save Progress</button>
         </div>
       </form>
     </div>
@@ -473,8 +624,8 @@
         </div>
 
         <div class="modal-footer">
-          <button type="button" id="btn-cancel-goal-modal" class="btn btn-secondary">Cancel</button>
-          <button type="submit" id="btn-save-goal" class="btn btn-primary">Update Goal</button>
+          <button type="button" id="btn-cancel-goal-modal" class="pill-btn pill-btn-pink">Cancel</button>
+          <button type="submit" id="btn-save-goal" class="pill-btn pill-btn-cyan">Update Goal</button>
         </div>
       </form>
     </div>
@@ -488,12 +639,12 @@
         <button id="btn-close-delete-modal" class="modal-close-btn" aria-label="Close modal">&times;</button>
       </div>
       <div class="modal-body">
-        <p>Are you sure you want to remove <strong id="delete-book-title"></strong> from your library? This action cannot be undone.</p>
+        <p>Are you sure you want to remove <strong id="delete-book-title"></strong> from your bookshelf? This action cannot be undone.</p>
         <input type="hidden" id="delete-book-id" value="">
       </div>
       <div class="modal-footer">
-        <button type="button" id="btn-cancel-delete" class="btn btn-secondary">Cancel</button>
-        <button type="button" id="btn-confirm-delete" class="btn btn-danger">Delete Book</button>
+        <button type="button" id="btn-cancel-delete" class="pill-btn pill-btn-pink">Cancel</button>
+        <button type="button" id="btn-confirm-delete" class="pill-btn pill-btn-danger">Delete Book</button>
       </div>
     </div>
   </div>
@@ -501,7 +652,7 @@
   <!-- Toast Container -->
   <div id="toast-container" class="toast-container" aria-live="assertive"></div>
 
-  <!-- Scripts -->
+  <!-- Application Script -->
   <script src="/static/js/app.js"></script>
 </body>
 </html>

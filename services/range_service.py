@@ -17,20 +17,11 @@ def binary_search_upper_bound(sorted_books, target_date):
     """
     Finds the insertion point (exclusive upper bound) where all elements before this index
     have book['date_added'] <= target_date.
-
-    Topic: Binary Search Boundary and Insertion-Point Logic
-    Difficulty: Hard
     """
     low = 0
     high = len(sorted_books)
     while low < high:
         mid = (low + high) // 2
-        # BUG 4 (Binary Search Boundary and Insertion-Point Logic):
-        # Strict inequality `<` is used instead of `<=` in the upper bound boundary check.
-        # When `sorted_books[mid]["date_added"] == target_date`, it branches to `high = mid`
-        # instead of `low = mid + 1`. This turns the upper-bound search into a lower-bound search,
-        # which causes the range slice `sorted_books[start_idx:end_idx]` to exclude any books
-        # whose `date_added` exactly equals `end_date`.
         if sorted_books[mid]["date_added"] < target_date:
             low = mid + 1
         else:

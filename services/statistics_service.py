@@ -3,9 +3,6 @@ from database import get_all_books, get_reading_goal
 def compute_genre_frequency(books):
     """
     Computes frequency count of books per genre using a hash map.
-
-    Topic: Hash Maps and Frequency Counting
-    Difficulty: Easy
     """
     counts = {}
     for book in books:
@@ -13,10 +10,6 @@ def compute_genre_frequency(books):
         if not genre:
             genre = "Uncategorized"
 
-        # BUG 3 (Hash Maps and Frequency Counting):
-        # Off-by-one initialization defect in the frequency counting dictionary.
-        # When a genre is encountered for the first time, its count is initialized to 0 instead of 1.
-        # Consequently, any genre with 1 book displays a count of 0, and every genre count is undercounted by 1.
         if genre not in counts:
             counts[genre] = 0
         else:

@@ -305,8 +305,9 @@ document.addEventListener("DOMContentLoaded", () => {
     goalPercentText.textContent = `${s.reading_goal_percentage}% completed`;
 
     const remaining = Math.max(0, s.reading_goal_target - s.reading_goal_completed);
-    goalRemainingText.textContent = remaining === 0 ? "Goal achieved!" : `${remaining} ${remaining === 1 ? "book" : "books"} to go`;
-    navGoalPill.textContent = `${s.reading_goal_percentage}%`;
+    if (navGoalPill) {
+      navGoalPill.textContent = `${s.reading_goal_percentage}%`;
+    }
 
     // Continue Reading Section
     renderContinueReading();
@@ -699,10 +700,10 @@ document.addEventListener("DOMContentLoaded", () => {
   // ==========================================
   // Reading Goal Modal
   // ==========================================
-  document.getElementById("btn-open-goal").addEventListener("click", () => {
+  document.getElementById("btn-open-goal")?.addEventListener("click", () => {
     openGoalModal();
   });
-  document.getElementById("btn-edit-goal-trigger").addEventListener("click", () => {
+  document.getElementById("btn-edit-goal-trigger")?.addEventListener("click", () => {
     openGoalModal();
   });
 
@@ -774,6 +775,49 @@ document.addEventListener("DOMContentLoaded", () => {
       showToast("Error deleting book.", "error");
     }
   });
+
+  // ==========================================
+  // MINICOM Dialogue Slider
+  // ==========================================
+  const minicomDialogues = [
+    "Hi, I'm MINICOM! Your bookshelf is looking peaceful today.<br>Pick a book, flip some pages, and keep your reading streak alive! <span id='btn-dialogue-next' class='dialogue-arrow' title='Next message'>▶</span>",
+    "Quiet reading corner tip:<br>Even 15 minutes a day finishes over 20 books a year! <span id='btn-dialogue-next' class='dialogue-arrow' title='Next message'>▶</span>",
+    "Looking for your next read?<br>Filter by genre or track your progress across chapters! <span id='btn-dialogue-next' class='dialogue-arrow' title='Next message'>▶</span>"
+  ];
+
+  let currentDialogueIndex = 0;
+  const dialogueEl = document.getElementById("minicom-dialogue");
+  const counterEl = document.getElementById("bubble-slide-counter");
+  const dots = document.querySelectorAll(".bubble-dots .b-dot");
+
+  function setDialogue(index) {
+    currentDialogueIndex = (index + minicomDialogues.length) % minicomDialogues.length;
+    if (dialogueEl) {
+      dialogueEl.innerHTML = minicomDialogues[currentDialogueIndex];
+      // re-attach arrow listener
+      dialogueEl.querySelector("#btn-dialogue-next")?.addEventListener("click", () => {
+        setDialogue(currentDialogueIndex + 1);
+      });
+    }
+    if (counterEl) {
+      counterEl.textContent = `${currentDialogueIndex + 1} of ${minicomDialogues.length}`;
+    }
+    dots.forEach((dot, idx) => {
+      dot.classList.toggle("active", idx === currentDialogueIndex);
+    });
+  }
+
+  dots.forEach(dot => {
+    dot.addEventListener("click", () => {
+      const idx = parseInt(dot.dataset.slide, 10);
+      setDialogue(idx);
+    });
+  });
+
+  dialogueEl?.querySelector("#btn-dialogue-next")?.addEventListener("click", () => {
+    setDialogue(currentDialogueIndex + 1);
+  });
+
 
   // ==========================================
   // Initial Boot
