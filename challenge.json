@@ -1,0 +1,21 @@
+{
+  "challenge_id": "pageturn-reading-tracker",
+  "runtime_config": {
+    "runtime_type": "python-flask",
+    "install_command": "pip install -r requirements.txt",
+    "start_command": "python -m flask run --reload --host 0.0.0.0 --port 5000",
+    "test_command": "pytest",
+    "ports": [
+      {
+        "container_port": 5000,
+        "type": "preview"
+      }
+    ]
+  },
+  "bug_topics": [
+    "Linear Search",
+    "Sorting Algorithms and Comparator Logic",
+    "Hash Maps and Frequency Counting",
+    "Binary Search Boundary and Insertion-Point Logic"
+  ]
+}

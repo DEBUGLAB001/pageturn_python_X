@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="PageTurn — A curated personal reading tracker and bookshelf sanctuary.">
+  <title>PageTurn — Reading & Book Tracker</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+  <!-- Header / Navigation -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="brand">
+        <div class="brand-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+            <path d="M8 7h8"></path>
+            <path d="M8 11h6"></path>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <h1 class="brand-title">PageTurn</h1>
+          <span class="brand-subtitle">Reading Sanctuary</span>
+        </div>
+      </div>
+
+      <nav class="header-nav">
+        <button id="btn-open-goal" class="btn btn-secondary nav-action" title="Manage Reading Goal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <circle cx="12" cy="12" r="6"></circle>
+            <circle cx="12" cy="12" r="2"></circle>
+          </svg>
+          <span class="nav-btn-text">Reading Goal</span>
+          <span id="nav-goal-pill" class="badge-pill">0%</span>
+        </button>
+
+        <button id="btn-open-add-book" class="btn btn-primary nav-action" title="Add a new book">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+          <span class="nav-btn-text">Add Book</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Layout -->
+  <main class="main-content">
+    <div class="content-container">
+
+      <!-- Hero & Welcome Section -->
+      <section class="welcome-section" aria-label="Welcome and summary">
+        <div class="welcome-text">
+          <div class="welcome-eyebrow">Personal Reading Journal</div>
+          <h2 class="welcome-headline">Quiet chapters, steady pages.</h2>
+          <p class="welcome-desc">Track your reading habits, celebrate completed works, and cultivate a lifelong love for timeless literature.</p>
+        </div>
+        <div class="welcome-stats-overview">
+          <div class="mini-stat-card">
+            <div class="mini-stat-icon icon-forest">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+            </div>
+            <div class="mini-stat-info">
+              <span id="stat-total-books" class="mini-stat-number">0</span>
+              <span class="mini-stat-label">Total Books</span>
+            </div>
+          </div>
+
+          <div class="mini-stat-card">
+            <div class="mini-stat-icon icon-amber">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+            </div>
+            <div class="mini-stat-info">
+              <span id="stat-reading-books" class="mini-stat-number">0</span>
+              <span class="mini-stat-label">In Progress</span>
+            </div>
+          </div>
+
+          <div class="mini-stat-card">
+            <div class="mini-stat-icon icon-sage">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            </div>
+            <div class="mini-stat-info">
+              <span id="stat-completed-books" class="mini-stat-number">0</span>
+              <span class="mini-stat-label">Completed</span>
+            </div>
+          </div>
+
+          <div class="mini-stat-card">
+            <div class="mini-stat-icon icon-terracotta">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+            </div>
+            <div class="mini-stat-info">
+              <span id="stat-pages-read" class="mini-stat-number">0</span>
+              <span class="mini-stat-label">Pages Read</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Dashboard Cards: Continue Reading + Goal & Genre Insights -->
+      <section class="dashboard-grid">
+        <!-- Continue Reading Hero Card -->
+        <div id="continue-reading-card" class="featured-card">
+          <div class="featured-card-header">
+            <span class="featured-badge">Currently Reading</span>
+            <span id="continue-reading-date" class="featured-meta"></span>
+          </div>
+          <div id="continue-reading-content" class="featured-card-body">
+            <!-- Populated dynamically via JS -->
+            <div class="featured-empty">
+              <p>No book is currently marked as in progress. Pick a title from your shelf to begin reading.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Reading Goal Card -->
+        <div class="goal-widget-card">
+          <div class="widget-header">
+            <h3 class="widget-title">Annual Reading Goal</h3>
+            <button id="btn-edit-goal-trigger" class="btn-text-action" title="Change Target">Edit Target</button>
+          </div>
+          <div class="goal-widget-body">
+            <div class="goal-progress-container">
+              <div class="goal-numbers">
+                <span id="goal-completed-count" class="goal-big-num">0</span>
+                <span class="goal-divider">of</span>
+                <span id="goal-target-count" class="goal-target-num">12</span>
+                <span class="goal-unit">books read</span>
+              </div>
+              <div class="progress-bar-track">
+                <div id="goal-progress-fill" class="progress-bar-fill progress-forest" style="width: 0%;"></div>
+              </div>
+              <div class="goal-status-text">
+                <span id="goal-percent-text">0% completed</span>
+                <span id="goal-remaining-text" class="text-muted">12 books to go</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Genre Insights Section -->
+      <section class="genre-insights-section">
+        <div class="section-header-compact">
+          <div class="section-title-wrap">
+            <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path><path d="M22 12A10 10 0 0 0 12 2v10z"></path></svg>
+            <h3 class="section-title">Genre Insights</h3>
+          </div>
+          <span class="section-caption text-muted">Distribution of genres across your library</span>
+        </div>
+        <div id="genre-distribution-container" class="genre-chips-container">
+          <!-- Populated by JavaScript from statistics API -->
+          <div class="loading-placeholder">Calculating genre distribution...</div>
+        </div>
+      </section>
+
+      <!-- Bookshelf Main Section -->
+      <section class="bookshelf-section" aria-label="Personal Bookshelf">
+        <div class="bookshelf-header">
+          <div class="bookshelf-heading">
+            <h3 class="section-title">My Bookshelf</h3>
+            <span id="books-count-badge" class="count-badge">8 books</span>
+          </div>
+
+          <!-- Controls Bar -->
+          <div class="bookshelf-controls">
+            <!-- Search Field -->
+            <div class="search-input-wrapper">
+              <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              <input type="text" id="input-search" placeholder="Search by title or author..." autocomplete="off">
+              <button id="btn-clear-search" class="btn-clear-icon" style="display: none;" title="Clear search">×</button>
+            </div>
+
+            <!-- Filters Group -->
+            <div class="filters-cluster">
+              <!-- Status Filter Pills -->
+              <div class="segmented-control" role="tablist" aria-label="Filter by reading status">
+                <button class="seg-btn active" data-status="all">All</button>
+                <button class="seg-btn" data-status="Want to Read">Want to Read</button>
+                <button class="seg-btn" data-status="Currently Reading">Reading</button>
+                <button class="seg-btn" data-status="Completed">Completed</button>
+              </div>
+
+              <!-- Genre Select Filter -->
+              <div class="select-wrapper">
+                <select id="select-genre-filter" aria-label="Filter by Genre">
+                  <option value="all">All Genres</option>
+                  <option value="Fiction">Fiction</option>
+                  <option value="Non-Fiction">Non-Fiction</option>
+                  <option value="Sci-Fi">Sci-Fi</option>
+                  <option value="Fantasy">Fantasy</option>
+                  <option value="Romance">Romance</option>
+                  <option value="Mystery">Mystery</option>
+                  <option value="History">History</option>
+                  <option value="Philosophy">Philosophy</option>
+                  <option value="Biography">Biography</option>
+                </select>
+              </div>
+
+              <!-- Date Range Filter -->
+              <div class="date-range-cluster">
+                <div class="date-input-wrap">
+                  <label for="input-date-start" class="date-label">From</label>
+                  <input type="date" id="input-date-start" title="Filter by date added start">
+                </div>
+                <div class="date-input-wrap">
+                  <label for="input-date-end" class="date-label">To</label>
+                  <input type="date" id="input-date-end" title="Filter by date added end">
+                </div>
+                <button id="btn-clear-dates" class="btn-sm btn-subtle" title="Clear Date Range" style="display: none;">Clear Dates</button>
+              </div>
+
+              <!-- Sort Field & Direction -->
+              <div class="sort-cluster">
+                <div class="select-wrapper">
+                  <select id="select-sort-by" aria-label="Sort books by">
+                    <option value="date_added">Sort: Date Added</option>
+                    <option value="title">Sort: Title</option>
+                    <option value="author">Sort: Author</option>
+                    <option value="progress">Sort: Reading Progress</option>
+                  </select>
+                </div>
+                <button id="btn-toggle-sort-order" class="btn-icon" data-order="desc" title="Toggle Ascending / Descending">
+                  <svg id="icon-sort-desc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <polyline points="19 12 12 19 5 12"></polyline>
+                  </svg>
+                  <svg id="icon-sort-asc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: none;">
+                    <line x1="12" y1="19" x2="12" y2="5"></line>
+                    <polyline points="5 12 12 5 19 12"></polyline>
+                  </svg>
+                </button>
+              </div>
+
+              <!-- Reset All Filters -->
+              <button id="btn-reset-filters" class="btn-sm btn-subtle" style="display: none;">Reset Filters</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Books Grid Container -->
+        <div id="bookshelf-grid" class="books-grid" aria-live="polite">
+          <!-- Populated by JavaScript -->
+        </div>
+
+        <!-- Empty State -->
+        <div id="bookshelf-empty-state" class="empty-state-card" style="display: none;">
+          <div class="empty-state-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+            </svg>
+          </div>
+          <h4 id="empty-state-title" class="empty-state-title">No books match your criteria</h4>
+          <p id="empty-state-message" class="empty-state-desc">Try clearing your search query or relaxing your active filters to see your books.</p>
+          <div class="empty-state-actions">
+            <button id="btn-empty-clear-filters" class="btn btn-secondary">Clear All Filters</button>
+            <button id="btn-empty-add-book" class="btn btn-primary">+ Add New Book</button>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="app-footer">
+    <div class="footer-container">
+      <p class="footer-text">PageTurn — Crafted for thoughtful readers. Built with Flask &amp; SQLite.</p>
+    </div>
+  </footer>
+
+  <!-- MODAL: Add / Edit Book -->
+  <div id="modal-book" class="modal-backdrop" aria-hidden="true" role="dialog" aria-labelledby="modal-book-title">
+    <div class="modal-sheet">
+      <div class="modal-header">
+        <h3 id="modal-book-title" class="modal-title">Add New Book</h3>
+        <button id="btn-close-book-modal" class="modal-close-btn" aria-label="Close modal">&times;</button>
+      </div>
+      <form id="form-book" class="modal-body">
+        <input type="hidden" id="book-form-id" value="">
+
+        <div class="form-row">
+          <div class="form-group flex-2">
+            <label for="book-input-title" class="form-label">Book Title <span class="required">*</span></label>
+            <input type="text" id="book-input-title" class="form-control" required placeholder="e.g. The Picture of Dorian Gray">
+            <span class="form-error" id="error-title"></span>
+          </div>
+          <div class="form-group flex-2">
+            <label for="book-input-author" class="form-label">Author <span class="required">*</span></label>
+            <input type="text" id="book-input-author" class="form-control" required placeholder="e.g. Oscar Wilde">
+            <span class="form-error" id="error-author"></span>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group flex-1">
+            <label for="book-input-genre" class="form-label">Genre <span class="required">*</span></label>
+            <select id="book-input-genre" class="form-control" required>
+              <option value="Fiction">Fiction</option>
+              <option value="Non-Fiction">Non-Fiction</option>
+              <option value="Sci-Fi">Sci-Fi</option>
+              <option value="Fantasy">Fantasy</option>
+              <option value="Romance">Romance</option>
+              <option value="Mystery">Mystery</option>
+              <option value="History">History</option>
+              <option value="Philosophy">Philosophy</option>
+              <option value="Biography">Biography</option>
+            </select>
+          </div>
+          <div class="form-group flex-1">
+            <label for="book-input-total-pages" class="form-label">Total Pages <span class="required">*</span></label>
+            <input type="number" id="book-input-total-pages" class="form-control" min="1" max="50000" required placeholder="e.g. 320">
+            <span class="form-error" id="error-total-pages"></span>
+          </div>
+          <div class="form-group flex-1">
+            <label for="book-input-current-page" class="form-label">Current Page</label>
+            <input type="number" id="book-input-current-page" class="form-control" min="0" value="0" placeholder="0">
+            <span class="form-error" id="error-current-page"></span>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group flex-1">
+            <label for="book-input-status" class="form-label">Reading Status</label>
+            <select id="book-input-status" class="form-control">
+              <option value="Want to Read">Want to Read</option>
+              <option value="Currently Reading">Currently Reading</option>
+              <option value="Completed">Completed</option>
+            </select>
+          </div>
+          <div class="form-group flex-1">
+            <label for="book-input-date-added" class="form-label">Date Added</label>
+            <input type="date" id="book-input-date-added" class="form-control">
+          </div>
+          <div class="form-group flex-1">
+            <label for="book-input-rating" class="form-label">Rating (Optional)</label>
+            <select id="book-input-rating" class="form-control">
+              <option value="">No rating yet</option>
+              <option value="5">⭐⭐⭐⭐⭐ (5 / 5)</option>
+              <option value="4">⭐⭐⭐⭐ (4 / 5)</option>
+              <option value="3">⭐⭐⭐ (3 / 5)</option>
+              <option value="2">⭐⭐ (2 / 5)</option>
+              <option value="1">⭐ (1 / 5)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Cover Palette Style</label>
+          <div class="cover-style-picker">
+            <label class="style-choice">
+              <input type="radio" name="cover_style" value="forest" checked>
+              <span class="palette-swatch swatch-forest" title="Forest Green"></span>
+              <span class="swatch-name">Forest</span>
+            </label>
+            <label class="style-choice">
+              <input type="radio" name="cover_style" value="terracotta">
+              <span class="palette-swatch swatch-terracotta" title="Terracotta"></span>
+              <span class="swatch-name">Terracotta</span>
+            </label>
+            <label class="style-choice">
+              <input type="radio" name="cover_style" value="navy">
+              <span class="palette-swatch swatch-navy" title="Deep Navy"></span>
+              <span class="swatch-name">Navy</span>
+            </label>
+            <label class="style-choice">
+              <input type="radio" name="cover_style" value="amber">
+              <span class="palette-swatch swatch-amber" title="Warm Amber"></span>
+              <span class="swatch-name">Amber</span>
+            </label>
+            <label class="style-choice">
+              <input type="radio" name="cover_style" value="plum">
+              <span class="palette-swatch swatch-plum" title="Rich Plum"></span>
+              <span class="swatch-name">Plum</span>
+            </label>
+            <label class="style-choice">
+              <input type="radio" name="cover_style" value="sage">
+              <span class="palette-swatch swatch-sage" title="Muted Sage"></span>
+              <span class="swatch-name">Sage</span>
+            </label>
+            <label class="style-choice">
+              <input type="radio" name="cover_style" value="slate">
+              <span class="palette-swatch swatch-slate" title="Slate Gray"></span>
+              <span class="swatch-name">Slate</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="book-input-notes" class="form-label">Notes &amp; Reflections (Optional)</label>
+          <textarea id="book-input-notes" class="form-control" rows="2" placeholder="Favorite quotes, key takeaways, or reading context..."></textarea>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" id="btn-cancel-book-modal" class="btn btn-secondary">Cancel</button>
+          <button type="submit" id="btn-save-book" class="btn btn-primary">Save Book</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: Quick Update Progress -->
+  <div id="modal-progress" class="modal-backdrop" aria-hidden="true" role="dialog" aria-labelledby="modal-progress-title">
+    <div class="modal-sheet modal-sm">
+      <div class="modal-header">
+        <h3 id="modal-progress-title" class="modal-title">Update Reading Progress</h3>
+        <button id="btn-close-progress-modal" class="modal-close-btn" aria-label="Close modal">&times;</button>
+      </div>
+      <form id="form-progress" class="modal-body">
+        <input type="hidden" id="progress-book-id" value="">
+        <div class="progress-modal-book-info">
+          <h4 id="progress-book-title" class="progress-title">Book Title</h4>
+          <span id="progress-book-author" class="progress-author text-muted">Author Name</span>
+        </div>
+
+        <div class="form-group">
+          <div class="progress-preview-bar-wrap">
+            <div class="progress-preview-labels">
+              <span id="progress-preview-pages">Page 0 of 0</span>
+              <span id="progress-preview-percent" class="fw-semibold">0%</span>
+            </div>
+            <div class="progress-bar-track">
+              <div id="progress-preview-fill" class="progress-bar-fill progress-forest" style="width: 0%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="progress-input-page" class="form-label">Current Page Number</label>
+          <input type="number" id="progress-input-page" class="form-control text-center text-lg" min="0" required>
+          <span class="form-error" id="error-progress-page"></span>
+        </div>
+
+        <!-- Quick increment buttons -->
+        <div class="quick-increment-buttons">
+          <button type="button" class="btn-sm btn-subtle" onclick="adjustProgressPage(-20)">-20</button>
+          <button type="button" class="btn-sm btn-subtle" onclick="adjustProgressPage(-5)">-5</button>
+          <button type="button" class="btn-sm btn-subtle" onclick="adjustProgressPage(5)">+5</button>
+          <button type="button" class="btn-sm btn-subtle" onclick="adjustProgressPage(20)">+20</button>
+          <button type="button" class="btn-sm btn-subtle" onclick="setProgressPageToTotal()">Finish</button>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" id="btn-cancel-progress-modal" class="btn btn-secondary">Cancel</button>
+          <button type="submit" id="btn-save-progress" class="btn btn-primary">Save Progress</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: Reading Goal -->
+  <div id="modal-goal" class="modal-backdrop" aria-hidden="true" role="dialog" aria-labelledby="modal-goal-title">
+    <div class="modal-sheet modal-sm">
+      <div class="modal-header">
+        <h3 id="modal-goal-title" class="modal-title">Reading Goal</h3>
+        <button id="btn-close-goal-modal" class="modal-close-btn" aria-label="Close modal">&times;</button>
+      </div>
+      <form id="form-goal" class="modal-body">
+        <p class="text-muted text-sm">Set your target number of books to complete for the year.</p>
+        <div class="form-group">
+          <label for="goal-input-target" class="form-label">Target Number of Books</label>
+          <input type="number" id="goal-input-target" class="form-control text-center text-lg" min="1" max="1000" required value="12">
+          <span class="form-error" id="error-goal-target"></span>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" id="btn-cancel-goal-modal" class="btn btn-secondary">Cancel</button>
+          <button type="submit" id="btn-save-goal" class="btn btn-primary">Update Goal</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: Confirm Delete -->
+  <div id="modal-delete" class="modal-backdrop" aria-hidden="true" role="dialog" aria-labelledby="modal-delete-title">
+    <div class="modal-sheet modal-sm">
+      <div class="modal-header">
+        <h3 id="modal-delete-title" class="modal-title">Remove Book</h3>
+        <button id="btn-close-delete-modal" class="modal-close-btn" aria-label="Close modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to remove <strong id="delete-book-title"></strong> from your library? This action cannot be undone.</p>
+        <input type="hidden" id="delete-book-id" value="">
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="btn-cancel-delete" class="btn btn-secondary">Cancel</button>
+        <button type="button" id="btn-confirm-delete" class="btn btn-danger">Delete Book</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div id="toast-container" class="toast-container" aria-live="assertive"></div>
+
+  <!-- Scripts -->
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
